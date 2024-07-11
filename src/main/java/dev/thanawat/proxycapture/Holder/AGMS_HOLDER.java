@@ -6,10 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import dev.thanawat.proxycapture.PORT.AGMS_PORT_LVL;
+import dev.thanawat.proxycapture.Vote.AGMS_VOTE;
 
 @Entity
 public class AGMS_HOLDER {
@@ -25,10 +29,14 @@ public class AGMS_HOLDER {
 	private String type_Name;
 	
 	@ManyToOne
-	@JoinColumn(name = "ports_id")
+	@JoinColumn(name = "PORT")
 	@JsonBackReference
 	private AGMS_PORT_LVL ports;
 
+	@OneToMany(mappedBy = "Share_NO")
+	@JsonManagedReference
+	private List<AGMS_VOTE> shareNO;
+	
 	public AGMS_HOLDER() {
 	}
 
